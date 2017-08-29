@@ -1,5 +1,6 @@
 <!-- обратите внимание на spring тэги -->
 <%@ taglib prefix="spr-form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spr" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -13,11 +14,18 @@
 <spr-form:form cssClass="box login"  method="POST"  modelAttribute="userJSP" action="check-user">
 
   <fieldset class="boxBody">
-    <spr-form:label path="name">Name:</spr-form:label>
+    <span style="float: right">
+      <a href="?lang=en">en</a>
+      <a href="?lang=ru">ru</a>
+    </span>
+
+    <spr-form:label path="name"><spr:message code="username" /></spr-form:label>
     <spr-form:input path="name"/>
-    
-    <spr-form:label path="password">Password:</spr-form:label>
+    <spr-form:errors path="name" cssClass="error" />
+
+    <spr-form:label path="password"><spr:message code="password" /></spr-form:label>
     <spr-form:password path="password"/>
+    <spr-form:errors path="password" cssClass="error" />
   </fieldset>
 
   <footer>

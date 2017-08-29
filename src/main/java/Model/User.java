@@ -2,11 +2,16 @@ package Model;
 
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Size;
 
-@Component("user")
+
+@Component
 public class User {
 
+    @Size(min = 3,  message = "Имя должно быть от 3 символов")
     private String name;
+
+    @Size(min = 5, max = 12, message = "Пароль должен быть от 5 до 12 символов")
     private String password;
 
     public String getName() {
@@ -24,4 +29,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

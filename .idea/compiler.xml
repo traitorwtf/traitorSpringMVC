@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="SpringMVC_JSPHelloWorld" />
+        <module name="traitorSpringMVC" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="SpringMVC_JSPHelloWorld" target="1.8" />
+      <module name="traitorSpringMVC" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
