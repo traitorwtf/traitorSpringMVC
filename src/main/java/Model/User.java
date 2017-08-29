@@ -3,7 +3,7 @@ package Model;
 import org.springframework.stereotype.Component;
 
 
-@Component
+@Component("user")
 public class User {
 
     private String name;

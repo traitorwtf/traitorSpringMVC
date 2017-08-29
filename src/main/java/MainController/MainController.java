@@ -25,7 +25,7 @@ public class MainController {
     <spring:form method="post"  modelAttribute="userJSP" action="check-user">,
     то попадем вот сюда
      */
-    @RequestMapping(value = "/check-user")
+    @RequestMapping(value = "/check-user", method = RequestMethod.POST)
     public ModelAndView checkUser(@ModelAttribute("userJSP") User user) {
         ModelAndView modelAndView = new ModelAndView();
 
