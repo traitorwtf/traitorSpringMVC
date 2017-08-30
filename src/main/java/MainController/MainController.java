@@ -6,10 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
@@ -23,6 +20,14 @@ import java.util.Map;
 @Controller
 @SessionAttributes("userJSP")
 public class MainController {
+
+    private static final int WEAK_STRENGTH = 1;
+    private static final int FAIR_STRENGTH = 5;
+    private static final int STRONG_STRENGTH = 7;
+
+    private static final String WEAK_COLOR = "#FF0000";
+    private static final String FEAR_COLOR = "#FF9900";
+    private static final String STRONG_COLOR = "#0099CC";
 
     /*First method on start application*/
     /*Попадаем сюда на старте приложения (см. параметры аннтоции и настройки пути после деплоя) */
@@ -63,5 +68,20 @@ public class MainController {
     public String moveToSecondPage(Model model){
 
         return "secondPage";
+    }
+
+    //Реализация AJAX с использованием jQuery технологии
+    @RequestMapping(value = "/checkStrength", method = RequestMethod.GET, produces = { "text/html; charset=UTF-8" })
+    public @ResponseBody String checkStrength(@RequestParam String password) {
+        String result = "<span style=\"color:%s; font-weight:bold;\">%s</span>";
+
+        if (password.length() >= WEAK_STRENGTH & password.length() < FAIR_STRENGTH) {
+            return String.format(result, WEAK_COLOR, "Слабый");
+        } else if (password.length() >= FAIR_STRENGTH & password.length() < STRONG_STRENGTH) {
+            return String.format(result, FEAR_COLOR, "Средний");
+        } else if (password.length() >= STRONG_STRENGTH) {
+            return String.format(result, STRONG_COLOR, "Сильный");
+        }
+        return "";
     }
 }

@@ -8,6 +8,20 @@
 <head>
   <title>TRAITOR's Page</title>
   <link href="/resources/css/home.css" rel="stylesheet" type="text/css" />
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+      function doAjax() {
+          $.ajax({
+              url: 'checkStrength',
+              data: ({password : $('#password').val()}),
+              success: function(data) {
+                  $('#strengthValue').html(data);
+              }
+          });
+      }
+  </script>
 </head>
 
 <body>
@@ -24,8 +38,9 @@
     <spr-form:errors path="name" cssClass="error" />
 
     <spr-form:label path="password"><spr:message code="password" /></spr-form:label>
-    <spr-form:password path="password"/>
+    <spr-form:password path="password" onkeyup="doAjax()"/>
     <spr-form:errors path="password" cssClass="error" />
+    <span style="float: right" id="strengthValue"> </span>
   </fieldset>
 
   <footer>
